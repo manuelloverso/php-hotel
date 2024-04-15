@@ -83,6 +83,14 @@
                             } else{
                                 echo 'non puoi parcheggiare';
                             }
+
+                            /* format the distance to center output */
+                        } else if($key == 'distance_to_center'){
+                            echo $value . ' km ';
+
+                            /* all the other outputs */
+                        } else {
+                            echo $value;
                         }
                         echo '</td>';
                     }
