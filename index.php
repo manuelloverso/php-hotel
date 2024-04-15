@@ -41,7 +41,6 @@
     ];
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +54,12 @@
 <body>
     <main>
         <div class="container">
+
+            <form action="" method="get">
+                <label for="can_park">Filter hotels for access to parking</label>
+                <input type="checkbox" name="can_park" id="">
+                <button type="submit">Search</button>
+            </form>
 
             <h2>Hotels</h2>
             <table class="table">
@@ -70,31 +75,65 @@
 
                 <tbody>
                     <?php 
+                    /* execute only if the filter is on */
+                    if ($_GET['can_park']== 'on') {
+                        foreach ($hotels as $hotel){
+                            /* Show only hotels with parking set on true */
+                            if ($hotel['parking']) {
 
-                    foreach ($hotels as $hotel){
-                    echo '<tr>';
-                    foreach ($hotel as $key => $value){
-                        echo "<td>" ;
-                        
-                        /* format the parking output */
-                        if ($key == 'parking') {
-                            if ($value) {
-                                echo 'puoi parcheggiare';
-                            } else{
-                                echo 'non puoi parcheggiare';
+                                echo '<tr>';
+                                foreach ($hotel as $key => $value){
+                                    echo "<td>" ;
+                                    
+                                    /* format the parking output */
+                                    if ($key == 'parking') {
+                                        if ($value) {
+                                            echo 'can park';
+                                        } else{
+                                            echo "can't park";
+                                        }
+            
+                                        /* format the distance to center output */
+                                    } else if($key == 'distance_to_center'){
+                                        echo $value . ' km ';
+            
+                                        /* all the other outputs */
+                                    } else {
+                                        echo $value;
+                                    }
+                                    echo '</td>';
+                                }
+                                echo '</tr>';
                             }
-
-                            /* format the distance to center output */
-                        } else if($key == 'distance_to_center'){
-                            echo $value . ' km ';
-
-                            /* all the other outputs */
-                        } else {
-                            echo $value;
+                            }
+                    } 
+                    /* execute only if filter is off */
+                    else{
+                        foreach ($hotels as $hotel){
+                        echo '<tr>';
+                        foreach ($hotel as $key => $value){
+                            echo "<td>" ;
+                            
+                            /* format the parking output */
+                            if ($key == 'parking') {
+                                if ($value) {
+                                    echo 'can park';
+                                } else{
+                                    echo "can't park";
+                                }
+    
+                                /* format the distance to center output */
+                            } else if($key == 'distance_to_center'){
+                                echo $value . ' km ';
+    
+                                /* all the other outputs */
+                            } else {
+                                echo $value;
+                            }
+                            echo '</td>';
                         }
-                        echo '</td>';
-                    }
-                    echo '</tr>';
+                        echo '</tr>';
+                        }
                     }
 
                     ?>
