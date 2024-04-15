@@ -40,4 +40,59 @@
 
     ];
 
+
+
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>PHP Hotels</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+
+            <h2>Hotels</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Parking</th>
+                        <th scope="col">Vote</th>
+                        <th scope="col">Distance to center</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php 
+
+                    foreach ($hotels as $hotel){
+                    echo '<tr>';
+                    foreach ($hotel as $key => $value){
+                        echo "<td>" ;
+                        
+                        /* format the parking output */
+                        if ($key == 'parking') {
+                            if ($value) {
+                                echo 'puoi parcheggiare';
+                            } else{
+                                echo 'non puoi parcheggiare';
+                            }
+                        }
+                        echo '</td>';
+                    }
+                    echo '</tr>';
+                    }
+
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
